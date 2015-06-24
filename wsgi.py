@@ -32,11 +32,8 @@ if os.environ["DJANGO_ENV"] == 'production':
     
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "planrecup.settings")
 
-#settings.configure()
-import django.core.handlers.wsgi
-application = django.core.handlers.wsgi.WSGIHandler()
-
-#application = get_wsgi_application()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
 
 
 
