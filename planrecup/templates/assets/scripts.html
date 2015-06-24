@@ -1,0 +1,10 @@
+{% load static compress sekizai_tags %}
+{% compress js %}
+<script type="text/javascript" src="{% static "components/historyjs/native.history.js" %}"></script>
+<script type="text/javascript" src="{% static "components/underscore/underscore.js" %}"></script>
+<script type="text/javascript" src="{% static "components/backbone/backbone.js" %}"></script>
+<script type="text/javascript" src="{% static "components/json2/json2.js" %}"></script>
+
+<script type="text/javascript" src="{% static "parsley/js/parsley.js" %}" ></script>
+{% endcompress %}
+{% render_block "js" %}

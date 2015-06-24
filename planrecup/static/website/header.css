@@ -1,0 +1,36 @@
+
+
+.content-head{
+	background:#333;
+	
+}
+.centered-logo{
+	margin:0px auto;
+	width:200px;
+	padding-top:10%;
+}
+
+.head-language{
+	position:absolute;
+	top:0px;
+	right:0px;
+	color:#000;
+	font-weight:bold;
+	font-size:14px;
+	font-family:"Cabin";
+}
+.head-language ul{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	clear:both;
+}
+.head-language li{
+	margin:0px;
+	padding:8px 8px;
+	float:right;
+	text-align:center;
+}
+.head-language li a{
+	color:#000;
+}

@@ -1,0 +1,6 @@
+{% extends 'content/page.html' %}
+{% load rux_tags %}
+{% block content %}
+    {{ block.super }}
+{% endblock %}
+{% rux_view 'events/afpyro/afpyro-backend' 'browse' %}

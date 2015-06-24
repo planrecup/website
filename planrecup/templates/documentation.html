@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% load i18n  %}
+
+
+{% block extra-styles %}
+    {{ block.super }}
+    <link href="{{ STATIC_URL }}css/documentation.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-6 col-md-push-3 documentation-container" >
+       <div class="documentation-content" >
+       {% autoescape off %}
+           {{ content }}
+       {% endautoescape %}
+       </div>
+   </div>
+</div>
+{% endblock %}

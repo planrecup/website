@@ -1,0 +1,29 @@
+{% extends 'register/base.html' %}
+{% load i18n sekizai_tags %}
+
+{% block title %}{% trans "Sign In" %}{% endblock %}
+
+{% block page-header %}
+	<div class="clearfix page-header-simple">
+		<div class="pull-left" >
+			<h1>{% trans "Sign in" %}</h1>
+		</div>
+	</div>
+{% endblock %}
+
+{% block registration-form-head %}
+	<h1>{% trans "Identify yourself" %}</h1>
+{% endblock %}
+
+{% block registration-form-foot %}	
+	    <div class="register-login-form-btn">
+		    <button id="send-action-button" class="action-button flat-btn">{% if user_exists %}{% trans "Login" %}{% else %}{% trans "Continue" %}{% endif %}</button>
+	    </div>
+{% endblock %}
+
+{% block registration-form-button-bar %}
+{% endblock %}
+
+{% block action-pipe-js %}
+{% endblock %}
+

@@ -1,0 +1,245 @@
+{% load static content_tags sekizai_tags compress %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>planrecup</title>
+        <link rel="icon" type="image/x-icon" href="/static/assets/images/favicons/favicon.ico" />
+        <link rel="icon" type="image/png" href="/static/assets/images/favicons/favicon.png" />
+        <!-- For iPhone 4 Retina display: -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/assets/images/favicons/apple-touch-icon-114x114-precomposed.png">
+        <!-- For iPad: -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/assets/images/favicons/apple-touch-icon-72x72-precomposed.png">
+        <!-- For iPhone: -->
+        <link rel="apple-touch-icon-precomposed" href="/static/assets/images/favicons/apple-touch-icon-60x60-precomposed.png">
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/assets/css/theme.min.css">
+        <link rel="stylesheet" href="/static/assets/css/color-defaults.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-beige-black.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-black-beige.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-black-white.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-black-yellow.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-blue-white.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-green-white.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-black-yellow.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-white-black.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-white-blue.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-white-green.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-yellow-black.min.css">
+        <link rel="stylesheet" href="/static/assets/css/swatch-yellow-black.min.css">
+        <link rel="stylesheet" href="/static/assets/css/fonts.min.css" media="screen">
+        
+        <link href="{% static "styles/ui.css" %}" rel="stylesheet">
+    
+        {% block canonical-link %}{% endblock canonical-link %}
+        {% block alternate-hreflang-link %}
+          {% for sup_lang in LANGUAGES %}
+            {% if sup_lang.0 != LANGUAGE_CODE %}
+              <link rel="alternate" hreflang="{{ sup_lang.0 }}" href="http://{{ request.get_host }}/{{ sup_lang.0 }}{{ request.get_full_path }}" />
+            {% endif %}
+          {% endfor %}
+        {% endblock alternate-hreflang-link %}
+        
+        {% include 'assets/fonts.html' %}
+        {% compress css %}
+        {% include "assets/styles.html" %}
+        {% include 'content/assets/styles.html' %}
+        {% block extra-styles %}{% endblock %}
+        {% endcompress %}
+        
+    </head>
+    <body>
+
+{% block page_top_bottom %}
+
+    {% if user.is_authenticated %}
+        {% if has_permission %}
+            {% block ui-head %}{% endblock %}
+            {% block ui %}
+            {% endblock %}
+            {% block ui-foot %}{% endblock %}
+        {% endif %}
+    {% else %}
+    
+    {% endif %}
+    
+{% endblock %}
+
+        <header id="masthead" class="navbar navbar-sticky swatch-white-black" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".main-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand">
+                        <img src="/static/images/logo-front.png" alt="biodigitals">
+                    </a>
+                </div>
+                <nav class="collapse navbar-collapse main-navbar" role="navigation">
+                    {% comment %}
+                    <div class="sidebar-widget widget_search pull-right">
+                        <form action="/search/">
+                            <div class="input-group">
+                                <input name="keyword" class="form-control" type="text" placeholder="Search here....">
+                                <span class="input-group-btn">
+                            <button class="btn" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                            </div>
+                        </form>
+                    </div>
+                    {% endcomment %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="{% if currentNode.get_url == '/' %}active{% endif %}"><a href="/">Acceuil</a></li>
+                        {% comment %}<li class="{% if currentNode.get_url == '/complete/' %}active{% endif %}"><a href="/infos/">Contact</a></li>{% endcomment %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <div id="content" role="main">
+            
+            <section class="section swatch-white-yellow">
+                <div class="container">
+                    {% block page-breadcrumb %}
+                        {% if request.path != '/' %}
+                        {% content_breadcrumb %}
+                        {% endif %}
+                    {% endblock %}
+                    {% block page-header %}
+                    <header class="section-header underline">
+                        <img src="{% static "images/logo-planrecup-front.png" %}" width="133" /><br/>
+                        <h1 class="headline hyper hairline">{{ currentNode.title }}</h1>
+                        <p class="big">{{ currentNode.description }}</p>
+                    </header>
+                    {% endblock %}
+                    {% block page-message %}
+                        {% if messages %}
+                            {% for message in messages %}
+                              <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                                  <strong>{{ message }}</strong>
+                              </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </section>
+            
+            <section id="page-content" class="section swatch-yellow-black has-top">
+                <div class="decor-top">
+                    <svg class="decor" height="100%" preserveaspectratio="none" version="1.1" viewbox="0 0 100 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0 L100 100 L0 100" stroke-width="0"></path>
+                    </svg>
+                </div>
+
+                {% block body %}
+                {% endblock %}
+                
+                {% block content %}
+                <div class="row">
+                    <div class="col-md-3 col-md-push-5">
+                    {% content_render currentNode.content %}
+                    </div>
+                </div>
+                {% endblock %}
+                
+            </section>
+            
+            <section class="section swatch-yellow-black has-top">
+                <div class="decor-top">
+                    <svg class="decor" height="100%" preserveaspectratio="none" version="1.1" viewbox="0 0 100 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0 L100 100 L0 100" stroke-width="0"></path>
+                    </svg>
+                </div>
+                {% comment %}
+                <div class="container">
+                    {% block bottom-content %}
+                    <header class="section-header underline text-center">
+                        <h1 class="headline super hairline">tenez moi au courant !</h1>
+                    </header>
+                    <div>
+                        <form id="action-form" class="text-center" action="" method="POST" >
+                            {{ action_forms.0.email }}
+                            {{ action_forms.0.first_name }}
+                            {{ action_forms.0.last_name }}
+                            {% csrf_token %}
+                            <br />
+                            <button class="" style="width:50%;" >voila !</button>
+                        </form>
+                    </div>
+                    {% endblock %}
+                </div>
+                {% endcomment %}
+            </section>
+            
+            <footer id="footer" role="contentinfo">
+                <section class="section swatch-black-yellow has-top">
+                    <div class="decor-top">
+                        <svg class="decor" height="100%" preserveaspectratio="none" version="1.1" viewbox="0 0 100 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0 L50 100 L100 0 L100 100 L0 100" stroke-width="0"></path>
+                        </svg>
+                    </div>
+                    {% block page-footer %}
+                    {% endblock %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div id="swatch_social-2" class="sidebar-widget  widget_swatch_social">
+                                    <ul class="unstyled inline small-screen-center social-icons social-background social-big">
+                                        <li>
+                                            <a target="_blank" href="http://www.facebook.com/planrecup">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="http://www.twitter.com/planrecup">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="mailto:planrecup@gmail.com">
+                                                <i class="fa fa-google-plus"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="text-4" class="sidebar-widget widget_text">
+                                    <div class="textwidget">@planrecup | allright, reserved !
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </footer>
+        </div>
+        <a class="go-top hex-alt" href="javascript:void(0)">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <script src="/static/assets/js/packages.min.js"></script>
+        <script src="/static/assets/js/theme.min.js"></script>
+        
+        {% if request.user.is_authenticated %}
+            {% include "content/assets/scripts.html" %}
+        {% else %}
+            <script src="{% static "js/website.js" %}"></script>
+            {% include 'assets/scripts.html' %}
+        {% endif %}
+        {% block extra-scripts %}{% endblock %}
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-36650505-1');ga('send','pageview');
+        </script>
+        {% render_block "js" %}
+    </body>
+</html>

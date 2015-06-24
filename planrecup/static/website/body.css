@@ -1,0 +1,151 @@
+
+#body-wrapper, #my-body{
+	
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	overflow-y:auto;
+	overflow-x:hidden;
+	
+}
+#wrap{
+	background:#333;
+}
+
+
+.fulldiv-image{
+	
+	background-repeat: no-repeat;
+	background-position:center center; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	display:inline-block;
+	
+	width:100%;
+	height:100%;
+	
+}
+
+.fullimage-div{
+	
+	background-repeat: no-repeat;
+	background-position:center center; 
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	-o-background-size: contain;
+	background-size: contain;
+	
+	display:inline-block;
+	
+	width:100%;
+	height:100%;
+	
+}
+.fullimage-div{
+		display:inline-block;
+	}
+
+.head-content{
+		text-align:center;
+		margin-bottom:40px;
+		background:#EEE;
+	}
+	.main-content{
+		max-width:500px;
+	}
+	
+	.header-back{
+		padding:20px;
+		font-family:cursive;
+		font-size:24px;
+		text-align:center;
+	}
+	.header-back a,
+	.header-back a:link,
+	.header-back a:visited{
+		text-decoration:none;
+	}
+	
+	h1{
+		font-family:'Great Vibes', cursive;
+		color:#000000;
+		text-align:center;
+		font-size:72px;
+		line-height:60px;
+		padding-top:20px;
+		padding-bottom:30px;
+		
+	}
+	h2{
+		font-family:'Cabin', cursive;		
+		font-size:32px;
+		line-height:48px;
+	}
+	
+	h3{
+		
+	}
+	time{
+		display:block;
+		text-align:center;
+		line-height:32px;
+		font-style:italic;
+		font-size:14px;
+		color:#888;
+	}
+	
+	.page-view a,
+	.page-view a:link,
+	.page-view a:visited{
+		color:#A6B72D;
+	}
+	
+	.item-heading{
+		width:20%;
+		min-height:5em;
+		padding:20px;
+		float:left;
+		margin:2%;
+	}
+	
+	.item-word{
+		width:auto;
+		min-height:5em;
+		padding:20px;
+		float:right;
+		margin:2%;
+		clear:left;
+		background-color:#555;
+		position:relative;
+	}
+	.frontendadmin-item-toolbar,
+	.item-word .frontendadmin-item-toolbar{
+		font-size:12px;
+		bottom:0px;
+		position:absolute;
+	}
+	
+	.menu-heading{
+	   text-align:center;
+	}
+	
+	.menu-element{
+		text-align:center;
+		margin-bottom:8%;
+	}
+	.menu-element p{
+		font-size:14px;
+		font-style:italic;
+		font-family:"Cabin";
+		margin:10px;
+	}
+	
+	.fullimage-div{
+		display:inline-block;
+	}
+	

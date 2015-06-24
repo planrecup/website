@@ -1,0 +1,18 @@
+
+.documentation-container{
+	margin:40px;
+}
+
+.documentation-content{
+	padding:20px;
+}
+
+.documentation-action{
+	padding:20px;
+	border:1px solid #ccc;
+	margin:20px 0;
+}
+
+.documentation-form{
+	padding:20px;
+}

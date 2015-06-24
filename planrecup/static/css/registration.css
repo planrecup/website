@@ -1,0 +1,15 @@
+.registration-page{
+	padding:10%;
+	background:white;
+}
+
+.registration-field{
+    margin:20px 0px;
+}
+
+
+.registration-field input{
+    width:auto;
+    float:right;
+    width:80%;
+}

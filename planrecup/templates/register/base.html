@@ -1,0 +1,103 @@
+{% extends "front.html" %}
+{% load i18n sekizai_tags %}
+
+{% block page-header %}
+    <div class="clearfix text-center">
+        <h1>{% trans "mes données" %}</h1>
+    </div>
+{% endblock %}
+
+{% block page-breadcrumb %}
+{% endblock %}
+
+{% block page-message %}
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-5 col-md-push-4 registration-page clearfix">
+        {% block registration-content %}
+        <div class="registration-body clearfix">
+            <div class="action-pipe-body-loader loader" style="display:none;">
+                <i class="icon-refresh icon-spin"></i>
+            </div>
+            <form id="action-form" class="clearfix" action="{{ request.path }}" method="POST"
+                  {% if action_component %}data-action-component="{{ action_component }}" {% endif %}data-parsley-validate="true"
+                  data-parsley-ui-enabled="true" data-parsley-focus="first">
+                {% csrf_token %}
+                
+                <div class="registration-head">
+                    {% block registration-form-head %}
+                        <h1>{% trans "Complete these informations" %}</h1>
+                    {% endblock %}
+                </div>
+                {% block registration-form-before %}
+                {% endblock registration-form-before %}
+                {% block registration-form-content %}
+                    {% for action_form in action_forms %}
+                        <div {% if action_form.slug %}id="{{ action_form.slug }}"{% endif %}
+                             class="registration-content clearfix">
+                            {% if action_form.title %}
+                                <h3>{{ action_form.title }}</h3>
+                            {% endif %}
+                            {% if action_form.description %}
+                                <p>{{ action_form.description }}</p>
+                            {% endif %}
+
+                            {% for field in action_form %}
+                                <div id="{{ field.name }}"
+                                     class="registration-field clearfix">
+                                    {% if not field.name in action_form.hidden_fields %}
+                                        {{ field.label_tag }}
+                                    {% endif %}
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <div class="registration-help-text">{{ field.help_text|safe }}</div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% endblock registration-form-content %}
+                {% block registration-form-foot %}
+                    <div class="registration-content"></div>
+                {% endblock registration-form-foot %}
+                <div class="registration-content action-form-button-bar clearfix">
+                    {% block registration-form-button-bar %}
+                        <button id="send-action-button"
+                                class="action-button flat-btn flat-pink pull-right">{% trans "Continue" %}</button>
+                    {% endblock %}
+                </div>
+            </form>
+            {% block registration-extra-foot %}
+            {% endblock %}
+        </div>
+        <div class="registration-sidebar sph-hide">
+            <div class="border-left">
+                {% block registration-sidebar %}
+                {% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+    
+    <div class="alert-top-right-notification">
+        {% block alerts %}
+        {% endblock alerts %}
+    </div>
+    
+    {% if DEBUG %}
+        <div style="padding:40px;background:#ffd" class="collapse-group">
+            <div>
+                AKEY:{{ akey }}<br/>
+            </div>
+
+            <div id="debug-search-drilldown" class="collapse">
+                {{ debug_data }}
+            </div>
+        </div>
+    {% endif %}
+    
+{% endblock %}
+
+{% block bottom-content %}
+{% endblock bottom-content %}

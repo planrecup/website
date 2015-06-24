@@ -1,0 +1,7 @@
+{% extends "content/page.html" %}
+{% load content_tags %}
+
+{% block content %}
+    <img src="{% content_image currentNode.get_url %}" />
+    {{ block.super }}
+{% endblock %}

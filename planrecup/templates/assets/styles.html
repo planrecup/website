@@ -1,0 +1,18 @@
+{% load static compress sekizai_tags %}
+
+{% include "content/assets/styles.html" %}
+
+{% comment %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/colors.css' %}">
+<link rel="stylesheet" href="{% static 'css/website.css' %}">
+<link rel="stylesheet" href="{% static 'css/typography.css' %}">
+{% endcomment %}
+
+{% compress css %}
+<link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+<link rel="stylesheet" href="{% static 'css/images.css' %}">
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+<link rel="stylesheet" href="{% static 'css/map.css' %}">
+{% endcompress %}

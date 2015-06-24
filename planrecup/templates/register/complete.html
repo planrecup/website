@@ -1,0 +1,27 @@
+{% extends 'register/base.html' %}
+{% load i18n sekizai_tags %}
+
+{% block title %}{% trans "Subscribe" %}{% endblock %}
+
+{% block page-header %}
+	<div class="clearfix page-header-simple">
+		<div class="pull-left" >
+			<h1>{% trans "Sign up" %}</h1>
+		</div>
+	</div>
+{% endblock %}
+
+{% block registration-form-head %}
+	<h1>{% trans "Complete or verify the following informations" %}</h1>
+{% endblock %}
+
+{% block registration-form-foot %}
+{% endblock %}
+
+{% block registration-form-button-bar %}
+    <button id="send-action-button" class="action-button flat-btn flat-pink">{% trans "Validate my profile" %}</button>
+{% endblock %}
+
+{% block action-pipe-js %}
+	
+{% endblock %}

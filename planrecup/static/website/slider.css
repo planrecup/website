@@ -1,0 +1,70 @@
+
+/* Prevents the slideshow from flashing on load */
+#slides {
+  display:none;
+}
+
+#slides .slidesjs-container {
+  margin-bottom:0px;
+}
+
+#slides .slidesjs-previous {
+  margin-right: 5px;
+  
+  position:absolute;
+    top:50%;
+    left:20px;
+    
+    z-index:100;
+    line-height:64px;
+    font-size:48px;
+  
+}
+#slides .slidesjs-next {
+  margin-right: 5px;
+ 
+    position:absolute;
+    top:50%;
+    right:20px;
+  
+    z-index:100;
+    
+    font-size:64px;
+}
+
+.slidesjs-pagination {
+    list-style: none;
+    margin:0px auto;
+    
+    position:absolute;
+    top:100px;
+    right:20px;
+    
+    
+    z-index:100;
+}
+
+.slidesjs-pagination li {
+    float: left;
+    margin: 0 1px;
+}
+
+.slidesjs-pagination li a {
+    display: block;
+    width: 13px;
+    height: 0;
+    padding-top: 13px;
+    background-image: url(../images/pagination.png);
+    background-position: 0 0;
+    float: left;
+    overflow: hidden;
+}
+
+.slidesjs-pagination li a.active, .slidesjs-pagination li a:hover.active { background-position: 0 -13px }
+
+.slidesjs-pagination li a:hover { background-position: 0 -26px }
+
+#slides a:link, #slides a:visited { color: rgba(255,255,255,0.4); text-decoration:none; }
+
+#slides a:hover, #slides a:active { color: rgba(255,255,255,0.7); text-decoration:none; }
+

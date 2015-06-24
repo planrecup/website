@@ -1,0 +1,184 @@
+{% load static i18n content_tags %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% trans "Dashboard" %}</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="{% static 'css/plugins/morris/morris-0.4.3.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style-dashboard.css' %}" rel="stylesheet">
+    
+    {% block extra-styles %}{% endblock %}
+    
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            
+                             <span>
+                                <img alt="image" class="img-circle" src="{% static 'img/profile_small.jpg' %}" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ request.user.first_name }} {{ request.user.last_name }}</strong></span> 
+                                <span class="text-muted text-xs block">{{ request.user.group.name }} <b class="caret"></b></span> </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="{% url "dashboard-profile" action="view" %}">{% trans "Profile" %}</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url "dashboard" action="logout" %}">Logout</a></li>
+                            </ul>
+                            
+                        </div>
+                        <div class="logo-element">
+                            GN
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url "dashboard" action="view" %}"><i class="fa fa-home"></i> <span class="nav-label">{% trans "Dashboard" %}</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url "todo-lists" %}"><i class="fa fa-ellipsis-v"></i> <span class="nav-label">Todo</span><span class="label label-warning pull-right">{{ todo_item_count }}/{{ todo_list_count }}</span></a>
+                        <ul class="nav nav-second-level" >
+                            <li><a href="{% url "todo-mine" %}"><i class="fa fa-user"></i> <span class="nav-label">{% trans "My Tasks" %}</span></a></li>
+                                {% regroup todo_list by group as section_list %}
+                                {% for group in section_list %}
+                                {% for item in group.list %}
+                                    <li><a href="{% url 'todo-incomplete_tasks' item.id item.slug %}">{{ item.name }} - {{ group.grouper }}{% if item.incomplete_tasks.count %}<span class="label label-warning pull-right">{{ item.incomplete_tasks.count }}/{{ item.item_set.count }}</span>{% endif %}</a></li>
+                                {% endfor %}
+                                {% endfor %}
+                            <li><a href="{% url 'todo-add_list' %}"><i class="fa fa-plus"></i> <span class="nav-label">{% trans "Add list ..." %}</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url "dashboard-content" action="view" %}"><i class="fa fa-rocket"></i> <span class="nav-label">{% trans "Website" %}</span></a>
+                        <ul class="nav nav-second-level collapse" >
+                            <li><a href="{% url "dashboard-content" action="my" %}"><i class="fa fa-pencil"></i> <span class="nav-label">{% trans "My articles" %}</span></a></li>
+                            <li><a href="{% url "dashboard-content" action="highlights" %}"><i class="fa fa-pencil"></i> <span class="nav-label">{% trans "Highlights" %}</span></a></li>
+                            <li><a href="{% url "dashboard-content" action="view" %}"><i class="fa fa-pencil"></i> <span class="nav-label">{% trans "Articles" %}</span></a></li>
+                            <li><a href="{% url "dashboard-digger-twitter" action="view" %}"><i class="fa fa-twitter"></i> <span class="nav-label">{% trans "Twitter" %}</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url "dashboard-events" action="view" %}"><i class="fa fa-calendar"></i> <span class="nav-label">{% trans "Events" %}</span></a>
+                        <ul class="nav nav-second-level collapse" >
+                            <li><a href="{% url "dashboard-digger-facebook" action="view" %}"><i class="fa fa-facebook"></i> <span class="nav-label">{% trans "Facebook" %}</span></a></li>
+                            <li><a href="{% url "dashboard-digger-googlecalendar" action="view" %}"><i class="fa fa-google"></i> <span class="nav-label">{% trans "Google Calendar" %}</span></a></li>
+                            <li><a href="{% url "dashboard-digger-meetup" action="view" %}"><i class="fa fa-square"></i> <span class="nav-label">{% trans "Meetup" %}</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url "dashboard-places" action="view" %}"><i class="fa fa-globe"></i> <span class="nav-label">{% trans "Lieux" %}</span></a></li>
+                    {% comment %}
+                    <li>
+                        <a href="{% url "dashboard-medias" action="view" %}"><i class="fa fa-image"></i> <span class="nav-label">{% trans "Medias" %}</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url "dashboard-members" action="view" %}"><i class="fa fa-user"></i> <span class="nav-label">{% trans "Adhérents" %}</span></a>
+                        <a href="{% url "dashboard-products" action="view" %}"><i class="fa fa-user"></i> <span class="nav-label">{% trans "Producteurs" %}</span></a>
+                        <a href="{% url "dashboard-projects" action="view" %}"><i class="fa fa-cogs"></i> <span class="nav-label">{% trans "Projects" %}</span></a>
+                        <a href="{% url "dashboard-queries" action="view" %}"><i class="fa fa-send"></i> <span class="nav-label">{% trans "Commandes" %}</span></a>
+                    </li>
+                    {% endcomment %}
+                    
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" method="post" action="{% url 'front' action='search' %}">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="keyword" id="top-search">
+                </div>
+            </form>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <a href="{% url "dashboard" action="logout" %}">
+                    <span><i class="fa fa-sign-out"></i> Log out</span>
+                </a>
+            </li>
+        </ul>
+
+        </nav>
+        </div>
+
+        <div class="wrapper wrapper-content">
+        {% content_breadcrumb %}
+        
+        {% if messages %}
+            {% for message in messages %}
+              <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                  <strong>{{ message }}</strong>
+              </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% block body %}{% endblock %}
+        {% block content %}{% endblock %}
+        </div>
+
+
+        <div class="footer">
+        </div>
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    
+    <!-- Peity -->
+    <script src="{% static 'js/plugins/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/demo/peity-demo.js' %}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="{% static 'js/plugins/pace/pace.min.js' %}"></script>
+    
+    <!-- Moment.js -->
+    <script src="{% static 'components/momentjs/moment.js' %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){;
+            moment('{{ LANGUAGE_CODE }}');
+            // globally autoreplace dates
+            $('time.moment-from-now').each(function (index) {
+                try {
+                    var datetime = moment($(this).attr('datetime'));
+                    $(this).text(datetime.fromNow(false));
+                } catch (err) {}
+            });
+        });
+    </script>
+    
+    <!-- jQuery UI -->
+    <script src="{% static 'js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+    
+    {% block extra-scripts %}{% endblock %}
+    
+</body>
+</html>

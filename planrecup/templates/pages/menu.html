@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% load static i18n sekizai_tags content_tags %}
+
+{% block content_head %}
+<div class="content-head" >
+	<div class="centered-logo" >		
+		<img src="{% static 'images/logo-lgn-front.png' %}" /> 
+	</div>
+</div>
+{% endblock %}
+
+{% block highlights %}
+<div class="container">
+    <header class="section-header underline">
+        <h1 class="headline super hairline">Formule été</h1>
+    </header>
+    <div class="row">
+        <div class="col-md-12 os-animation" data-os-animation="fadeInUp" data-os-animation-delay=".1s">
+            <div id="slider-flex1" class="flexslider" data-flex-speed="7000" data-flex-animation="slide" data-flex-directions="hide" data-flex-controls="show" data-flex-controlsalign="center">
+                <div class="section-header underline text-center">
+                    <p style="font-size:72px" >10<p>
+                    <p>balles<p>
+                    <p>la journée<p>
+                    <p>10h à 18h<p>
+                </div>
+                <div class="section-header underline text-center">
+                    <p>passe prendre un café !<p>
+                </div>
+                <div class="section-header underline text-center">
+                    <p>il fera frais tout l'été<p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block original %}
+<div class="container main-content text-center">
+	
+	{% get_item_object '/menu-du-jour' 'item' %}
+	
+	<div class="menu-heading" >
+		<h1>Menu du jour</h1>
+		"{{ item.title }}"
+		<time class="moment-from-now" datetime="{{ item.modified_date|date:'c' }}" itemprop="commentTime">{{ item.modified_date }}</time>
+	</div>
+	{% for highlight in highlights %}
+	   {% content_title highlight.get_url %}
+	{% endfor %}
+	<div class="menu-element" >
+		{% get_item_object '/plat-du-jour' 'menu_item' %}
+		<h2>{{ menu_item.title }}</h2>
+		<time class="moment-from-now" datetime="{{ menu_item.modified_date|date:'c' }}" itemprop="commentTime">{{ menu_item.modified_date }}</time>
+		<a href="{{ menu_item.get_url }}">
+			{% content_item_image menu_item 240 120 %}
+		</a><a href="{{ menu_item.get_url }}">
+		<p>{{ menu_item.description }}</p></a>
+	</div>
+	<div class="sub_ink" style="padding:40px 80px;" >
+		<span style="font-family:'Audiowide';word-wrap: none;" ><span>sub</span>_<span style="font-family:'Great Vibes';font-size:2em;" >Ink</span></span>
+	</div>
+</div>
+
+{% addtoblock "css" %}
+<style>
+	.main-content{
+		background:#EEE;
+		text-align:center;
+		padding-bottom:5%;
+		padding-top:10%;
+	}
+	h1{
+		font-family:'Great Vibes', cursive;
+		color:#000000;
+		text-align:center;
+		font-size:72px;
+		line-height:120px;
+		
+	}
+	h2{
+		font-family:'Great Vibes', cursive;		
+		font-size:32px;
+		line-height:48px;
+	}
+	
+	h3{
+		
+	}
+	time{
+		display:block;
+		text-align:center;
+		line-height:32px;
+		font-style:italic;
+		font-size:14px;
+		color:#888;
+	}
+	.menu-heading{
+		margin-bottom:70px;
+	}
+	.menu-element{
+		text-align:center;
+		margin-bottom:8%;
+	}
+	
+</style>
+{% endaddtoblock %}
+{% endblock %}
+
