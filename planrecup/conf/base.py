@@ -112,8 +112,7 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
-RUX_SERVER_IP = '0.0.0.0'
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['*']
 
 BASICAUTH_USERNAME = 'website'
 BASICAUTH_PASSWORD = 'website'
