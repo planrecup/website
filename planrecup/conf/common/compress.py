@@ -25,6 +25,6 @@ COMPRESS_OUTPUT_DIR = "cache"
 COMPRESS_CACHE_BACKEND = "locmem"
 
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 COMPRESS_PARSER = "compressor.parser.default_htmlparser.DefaultHtmlParser"
