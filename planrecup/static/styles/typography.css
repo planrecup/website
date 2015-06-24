@@ -1,0 +1,32 @@
+
+body{
+	font-family:"Open Sans";
+	line-height:1em;
+	font-size:1em;
+}
+h1{
+	font-size:32px;
+	line-height:36px;
+}
+h2{
+	font-size:24px;
+	line-height:32px;
+}
+h3{
+	font-size:18px;
+	line-height:24px;
+}
+ol{
+	list-style-type:numerical;
+	padding-left:24px;
+	line-height:32px;
+}
+ul{
+	list-style-type:square;
+	padding-left:24px;
+	line-height:24px;
+	font-size:18px;
+}
+
+a, a:link, a:visited{
+}
